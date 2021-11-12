@@ -1,44 +1,21 @@
-class Cliente {
-  nome;
-  cpf;
-}
+import { Cliente } from "./Cliente.js";
+import { ContaCorrente } from "./ContaCorrente.js";
 
-class ContaCorrente {
-  agencia;
-  // #saldo = 0 https://github.com/tc39/proposal-class-fields#private-fields
-  _saldo = 0;
+const cliente1 = new Cliente("Michel", 1234567789);
+const cliente2 = new Cliente("Alice", 12345678999);
 
-  sacar(valor) {
-    if (this._saldo >= valor) {
-      this._saldo -= valor;
-      return valor;
-    }
-  }
+//cliente1.nome = "Michel";
+//cliente1.cpf = 123456789;
 
-  depositar(valor) {
-    if (valor <= 0) {
-         return;
-    }
-    this._saldo += valor;
-  }
-}
+//cliente2.nome = "Maria";
+//cliente2.cpf = 12345678999;
 
-const cliente1 = new Cliente();
-const cliente2 = new Cliente();
+const conta1 = new ContaCorrente(cliente1, 1001);
 
-cliente1.nome = "Michel";
-cliente1.cpf = 123456789;
 
-cliente2.nome = "Maria";
-cliente2.cpf = 12345678999;
+const conta2 = new ContaCorrente(cliente2, 100001);
 
-const contaCorrenteMichel = new ContaCorrente();
-contaCorrenteMichel.agencia = 1001;
+conta1.transferir(200, conta2);
 
-contaCorrenteMichel.depositar(150);
-contaCorrenteMichel.sacar(50);
-
-const valorSacado = contaCorrenteMichel.sacar(50);
-console.log(valorSacado);
-
-console.log(contaCorrenteMichel);
+console.log(conta1);
+console.log(conta2);
